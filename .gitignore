@@ -5,3 +5,4 @@ bin/shop/manager/model/documents/Document.class
 bin/shop/manager/MainApp.class
 .classpath
 .settings/org.eclipse.jdt.core.prefs
+*.class
