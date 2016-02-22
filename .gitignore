@@ -1,0 +1,7 @@
+bin/shop/manager/model/delivery/Contractor.class
+bin/shop/manager/model/delivery/Delivery.class
+bin/shop/manager/model/delivery/ItemIn.class
+bin/shop/manager/model/documents/Document.class
+bin/shop/manager/MainApp.class
+.classpath
+.settings/org.eclipse.jdt.core.prefs
