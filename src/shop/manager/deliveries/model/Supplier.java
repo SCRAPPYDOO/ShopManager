@@ -5,12 +5,12 @@ import javafx.beans.property.StringProperty;
 
 public class Supplier {
   private IntegerProperty id;
-  private StringProperty lastName;
+  private StringProperty name;
   
-  public Supplier(IntegerProperty id, StringProperty lastName) {
+  public Supplier(IntegerProperty id, StringProperty name) {
     super();
     this.id = id;
-    this.lastName = lastName;
+    this.name = name;
   }
   
   public IntegerProperty getId() {
@@ -21,11 +21,11 @@ public class Supplier {
     this.id = id;
   }
   
-  public StringProperty getLastName() {
-    return lastName;
+  public StringProperty getName() {
+    return name;
   }
   
-  public void setLastName(StringProperty lastName) {
-    this.lastName = lastName;
+  public void setName(StringProperty name) {
+    this.name = name;
   }
 }
