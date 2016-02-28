@@ -7,12 +7,8 @@ public class Supplier {
   private IntegerProperty id;
   private StringProperty name;
   
-  public Supplier(IntegerProperty id, StringProperty name) {
-    super();
-    this.id = id;
-    this.name = name;
-  }
-  
+  public Supplier() {}
+
   public IntegerProperty getId() {
     return id;
   }

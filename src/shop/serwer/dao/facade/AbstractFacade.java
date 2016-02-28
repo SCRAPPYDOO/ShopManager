@@ -14,7 +14,7 @@ public abstract class AbstractFacade<T> {
     this.entityClass = entityClass;
   }
   
-  private static EntityManager em;
+  protected static EntityManager em;
   
   {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistentUnit");
@@ -26,13 +26,6 @@ public abstract class AbstractFacade<T> {
     em.persist(entity);
     em.getTransaction().commit();  
     return entity;
-  }
-  
-  public List<T> findAll() {
-    em.getTransaction().begin();
-    //List<T> result = em.find(entityClass, 1);
-    em.getTransaction().commit();
-    return null;
   }
   
   public T find(int id) {

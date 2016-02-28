@@ -8,5 +8,15 @@ import javax.persistence.Table;
 @Table(name="documents")
 public class DocumentEntity {
   @Id
-  int id;
+  Integer id;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+  
+  
 }

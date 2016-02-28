@@ -1,27 +1,36 @@
 package shop.serwer.dao.model.deliveries;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import shop.serwer.dao.model.documents.DocumentEntity;
 
-
 @Entity
 @Table(name="deliveries")
+@NamedQueries({
+  @NamedQuery(name = "findAll",
+      query = "FROM DeliveryEntity entity")
+})
 public class DeliveryEntity {
   @Id
-  private int id;
+  private Integer id;
   
   @Column(name = "external_id")
   private String externalId;
   
-  //List<DeliveryItemEntity> listOfItems;
+  @Transient
+  List<DeliveryItemEntity> listOfItems;
   
   @OneToOne
   @JoinColumn(name="supplier_id", nullable=true)
@@ -31,11 +40,14 @@ public class DeliveryEntity {
   @JoinColumn(name="document_id", nullable=true)
   private DocumentEntity document;
 
-  public int getId() {
+  @Column(name = "delivery_date")
+  Date deliveryDate;
+  
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -62,7 +74,24 @@ public class DeliveryEntity {
   public void setDocument(DocumentEntity document) {
     this.document = document;
   }
-  
-  
+
+  public List<DeliveryItemEntity> getListOfItems() {
+    if(this.listOfItems == null) {
+      this.listOfItems = new ArrayList<DeliveryItemEntity>();
+    }
+    return listOfItems;
+  }
+
+  public void setListOfItems(List<DeliveryItemEntity> listOfItems) {
+    this.listOfItems = listOfItems;
+  }
+
+  public Date getDeliveryDate() {
+    return deliveryDate;
+  }
+
+  public void setDeliveryDate(Date deliveryDate) {
+    this.deliveryDate = deliveryDate;
+  }
 }
 

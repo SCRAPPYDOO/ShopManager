@@ -6,12 +6,12 @@ import javafx.beans.property.IntegerProperty;
 /*
  * delivery item
  */
-public class ItemIn {
+public class DeliveryItem {
   private IntegerProperty id;
   private IntegerProperty amount;
   private DoubleProperty price;
   
-  public ItemIn(IntegerProperty id, IntegerProperty amount, DoubleProperty price) {
+  public DeliveryItem(IntegerProperty id, IntegerProperty amount, DoubleProperty price) {
     this.id = id;
     this.amount = amount;
     this.price = price;

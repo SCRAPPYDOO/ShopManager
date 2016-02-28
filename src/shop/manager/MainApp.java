@@ -71,23 +71,7 @@ public class MainApp extends Application {
       // Give the controller access to the main app.
       DeliveriesViewController controller = loader.getController();
 
-      Delivery delivery = new Delivery();
-      delivery.setId(new SimpleIntegerProperty(1));
-      delivery.setDeliveryDate(new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21)));
-      Document document = new Document();
-      document.setId(1);
-      document.setDocumentName(new SimpleStringProperty("Faktura Vat"));
-      delivery.setDocument(document);
 
-      Supplier supplier =
-          new Supplier(new SimpleIntegerProperty(1), new SimpleStringProperty("Gunfire"));
-      delivery.setSupplier(supplier);
-
-      deliveryList = FXCollections.observableArrayList();
-      
-      deliveryList.add(delivery);
-
-      controller.setDevlieriesList(deliveryList);
     } catch (IOException e) {
       e.printStackTrace();
     }

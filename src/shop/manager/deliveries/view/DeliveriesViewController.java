@@ -2,9 +2,7 @@ package shop.manager.deliveries.view;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,23 +12,25 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ma.glasnost.orika.Mapper;
 import shop.manager.MainApp;
 import shop.manager.deliveries.model.Delivery;
-import shop.manager.mapper.MapperDefinition;
-import shop.serwer.dao.facade.deliveries.DeliveriesFacade;
-import shop.serwer.dao.facade.deliveries.DeliveriesFacadeImpl;
-import shop.serwer.dao.model.deliveries.DeliveryEntity;
+import shop.serwer.service.DeliveriesService;
+import shop.serwer.service.DeliveriesServiceImpl;
 
 public class DeliveriesViewController {
 
   private Stage dialogStage;
+  
+  private DeliveriesService deliveriesService;
   
   @FXML
   private TableView<Delivery> deliveryTable;
 
   @FXML
   private TableColumn<Delivery, Integer> id;
+
+  @FXML
+  private TableColumn<Delivery, String> externalId;
 
   @FXML
   private TableColumn<Delivery, LocalDate> deliveryDate;
@@ -41,9 +41,7 @@ public class DeliveriesViewController {
   @FXML
   private TableColumn<Delivery, String> documentId;
 
-  public DeliveriesViewController() {
-
-  }
+  public DeliveriesViewController() {}
 
   public void setDevlieriesList(ObservableList<Delivery> deliveryList) {
     deliveryTable.setItems(deliveryList);
@@ -55,18 +53,15 @@ public class DeliveriesViewController {
     deliveryDate.setCellValueFactory(cellData -> cellData.getValue().getDeliveryDate());
     supplier.setCellValueFactory(cellData -> cellData.getValue().getSupplier().getName());
     documentId.setCellValueFactory(cellData -> cellData.getValue().getDocument().getDocumentName());
+    externalId.setCellValueFactory(cellData -> cellData.getValue().getExternalId());
 
     this.initializeDeliveryDialog();
 
     this.addListeners();
     
-    DeliveriesFacade facade = new DeliveriesFacadeImpl();
-    DeliveryEntity deliveryEntity = facade.find(1);
+    deliveriesService = new DeliveriesServiceImpl();
     
-    
-    ObservableList<Delivery> deliveryList = FXCollections.observableArrayList();
-    deliveryList.add(MapperDefinition.getMapper().map(deliveryEntity, Delivery.class));
-    this.setDevlieriesList(deliveryList);
+    this.deliveryTable.setItems(deliveriesService.getListOfDeliveries());
   }
 
   private void initializeDeliveryDialog() {

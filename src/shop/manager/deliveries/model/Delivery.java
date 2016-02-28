@@ -4,20 +4,22 @@ import java.time.LocalDate;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shop.manager.documents.model.Document;
 
 public class Delivery {
   private IntegerProperty id;
+  private StringProperty externalId;
   private ObjectProperty<LocalDate> deliveryDate;
   private Supplier supplier;
-  private ObservableList<ItemIn> itemList = FXCollections.observableArrayList();
+  private ObservableList<DeliveryItem> itemList = FXCollections.observableArrayList();
   private Document document;
 
   public Delivery() {}
 
-  public Delivery(IntegerProperty id, Supplier supplier, ObservableList<ItemIn> itemList) {
+  public Delivery(IntegerProperty id, Supplier supplier, ObservableList<DeliveryItem> itemList) {
     super();
     this.id = id;
     this.supplier = supplier;
@@ -40,11 +42,11 @@ public class Delivery {
     this.supplier = supplier;
   }
 
-  public ObservableList<ItemIn> getItemList() {
+  public ObservableList<DeliveryItem> getItemList() {
     return itemList;
   }
 
-  public void setItemList(ObservableList<ItemIn> itemList) {
+  public void setItemList(ObservableList<DeliveryItem> itemList) {
     this.itemList = itemList;
   }
 
@@ -62,6 +64,14 @@ public class Delivery {
 
   public void setDocument(Document document) {
     this.document = document;
+  }
+
+  public StringProperty getExternalId() {
+    return externalId;
+  }
+
+  public void setExternalId(StringProperty externalId) {
+    this.externalId = externalId;
   };
-  
+
 }
