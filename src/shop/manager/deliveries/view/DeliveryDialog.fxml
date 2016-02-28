@@ -2,37 +2,51 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<AnchorPane prefHeight="554.0" prefWidth="613.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shop.manager.deliveries.view.DeliveryDialogController">
    <children>
-      <VBox layoutX="-102.0" layoutY="-178.0" prefHeight="496.0" prefWidth="426.0">
+      <VBox layoutX="-102.0" layoutY="-178.0" prefHeight="554.0" prefWidth="613.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane>
+            <GridPane prefHeight="157.0" prefWidth="613.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label prefHeight="17.0" prefWidth="200.0" text="Data" />
-                  <Label text="Dostawca" GridPane.rowIndex="1" />
-                  <Label text="Dokument" GridPane.rowIndex="2" />
+                  <Label prefHeight="17.0" prefWidth="200.0" text="Data" GridPane.rowIndex="2" />
+                  <Label text="Dostawca" GridPane.rowIndex="3" />
+                  <Label text="Dokument" GridPane.rowIndex="4" />
+                  <Label text="Id" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="Szukaj" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="276.0" text="Szukaj" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="deliveryDate" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Numer Zamówienia" GridPane.rowIndex="1" />
+                  <TextField fx:id="deliveryExternalId" prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="deliveryId" GridPane.columnIndex="1" />
+                  <TextField fx:id="supplierName" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="documentName" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <TableView prefHeight="341.0" prefWidth="426.0">
+            <TableView prefHeight="356.0" prefWidth="613.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />
@@ -40,7 +54,7 @@
             </TableView>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button mnemonicParsing="false" text="Zapisz" />
+                <Button mnemonicParsing="false" onAction="#handleOk" text="Zapisz" />
               </buttons>
             </ButtonBar>
          </children>

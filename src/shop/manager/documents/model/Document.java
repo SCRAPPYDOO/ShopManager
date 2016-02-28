@@ -22,4 +22,8 @@ public class Document {
   public void setDocumentName(StringProperty documentName) {
     this.documentName = documentName;
   }
+
+  public String getDocumentNameAsString() {
+    return documentName.get();
+  }
 }

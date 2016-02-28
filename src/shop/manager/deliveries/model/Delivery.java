@@ -30,6 +30,10 @@ public class Delivery {
     return id;
   }
 
+  public int getIdAsInt() {
+    return id.get();
+  }
+
   public void setId(IntegerProperty id) {
     this.id = id;
   }
@@ -72,6 +76,13 @@ public class Delivery {
 
   public void setExternalId(StringProperty externalId) {
     this.externalId = externalId;
-  };
+  }
 
+  public String getExternalIdAsString() {
+    return externalId.get();
+  }
+
+  public LocalDate getDeliveryDateAsLocalDate() {
+    return deliveryDate.get();
+  };
 }

@@ -24,4 +24,8 @@ public class Supplier {
   public void setName(StringProperty name) {
     this.name = name;
   }
+
+  public String getNameAsString() {
+    return name.get();
+  }
 }

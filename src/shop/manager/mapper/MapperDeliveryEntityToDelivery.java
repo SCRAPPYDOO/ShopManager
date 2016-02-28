@@ -1,6 +1,5 @@
 package shop.manager.mapper;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 import shop.manager.deliveries.model.Delivery;

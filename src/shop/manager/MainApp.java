@@ -1,30 +1,19 @@
 package shop.manager;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 import javafx.application.Application;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import shop.manager.deliveries.model.Delivery;
-import shop.manager.deliveries.model.Supplier;
 import shop.manager.deliveries.view.DeliveriesViewController;
-import shop.manager.documents.model.Document;
 
 public class MainApp extends Application {
 
   private Stage primaryStage;
   private BorderPane rootLayout;
-
-  private ObservableList<Delivery> deliveryList;
 
   @Override
   public void start(Stage primaryStage) {
@@ -70,8 +59,6 @@ public class MainApp extends Application {
 
       // Give the controller access to the main app.
       DeliveriesViewController controller = loader.getController();
-
-
     } catch (IOException e) {
       e.printStackTrace();
     }
