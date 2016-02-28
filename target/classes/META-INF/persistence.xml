@@ -10,7 +10,7 @@
 			<!-- Configuring JDBC properties -->
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/airsoft_shop_db" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="marcin1" />
+			<property name="javax.persistence.jdbc.password" value="Marcin" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 
 			<!-- Hibernate properties -->

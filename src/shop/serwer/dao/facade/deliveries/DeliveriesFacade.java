@@ -8,4 +8,6 @@ public interface DeliveriesFacade {
   public DeliveryEntity create(DeliveryEntity deliveryEntity);
 
   public List<DeliveryEntity> findAll();
+
+  public DeliveryEntity find(int id);
 }

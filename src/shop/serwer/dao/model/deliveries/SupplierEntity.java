@@ -1,5 +1,12 @@
 package shop.serwer.dao.model.deliveries;
 
-public class SupplierEntity {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="supplier")
+public class SupplierEntity {
+  @Id
+  private int id;
 }

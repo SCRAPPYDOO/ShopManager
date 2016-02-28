@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +14,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import ma.glasnost.orika.Mapper;
 import shop.manager.MainApp;
 import shop.manager.deliveries.model.Delivery;
-import shop.manager.util.Mapper;
+import shop.manager.mapper.MapperDefinition;
 import shop.serwer.dao.facade.deliveries.DeliveriesFacade;
 import shop.serwer.dao.facade.deliveries.DeliveriesFacadeImpl;
 import shop.serwer.dao.model.deliveries.DeliveryEntity;
@@ -59,9 +61,12 @@ public class DeliveriesViewController {
     this.addListeners();
     
     DeliveriesFacade facade = new DeliveriesFacadeImpl();
-    List<DeliveryEntity> list = facade.findAll();
+    DeliveryEntity deliveryEntity = facade.find(1);
     
-    this.setDevlieriesList(Mapper.mapToDeliveryList(list));
+    
+    ObservableList<Delivery> deliveryList = FXCollections.observableArrayList();
+    deliveryList.add(MapperDefinition.getMapper().map(deliveryEntity, Delivery.class));
+    this.setDevlieriesList(deliveryList);
   }
 
   private void initializeDeliveryDialog() {
