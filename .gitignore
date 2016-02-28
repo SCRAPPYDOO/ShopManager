@@ -6,3 +6,4 @@ bin/shop/manager/MainApp.class
 .classpath
 .settings/org.eclipse.jdt.core.prefs
 *.class
+.settings/org.eclipse.m2e.core.prefs

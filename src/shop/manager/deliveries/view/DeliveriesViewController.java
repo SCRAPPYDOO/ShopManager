@@ -2,6 +2,7 @@ package shop.manager.deliveries.view;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,11 +15,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import shop.manager.MainApp;
 import shop.manager.deliveries.model.Delivery;
+import shop.manager.util.Mapper;
+import shop.serwer.dao.facade.deliveries.DeliveriesFacade;
+import shop.serwer.dao.facade.deliveries.DeliveriesFacadeImpl;
+import shop.serwer.dao.model.deliveries.DeliveryEntity;
 
 public class DeliveriesViewController {
 
   private Stage dialogStage;
-
+  
   @FXML
   private TableView<Delivery> deliveryTable;
 
@@ -52,6 +57,11 @@ public class DeliveriesViewController {
     this.initializeDeliveryDialog();
 
     this.addListeners();
+    
+    DeliveriesFacade facade = new DeliveriesFacadeImpl();
+    List<DeliveryEntity> list = facade.findAll();
+    
+    this.setDevlieriesList(Mapper.mapToDeliveryList(list));
   }
 
   private void initializeDeliveryDialog() {
