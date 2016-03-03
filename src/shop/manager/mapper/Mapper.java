@@ -19,10 +19,13 @@ import shop.manager.deliveries.model.Delivery;
 import shop.manager.deliveries.model.DeliveryItem;
 import shop.manager.deliveries.model.Supplier;
 import shop.manager.documents.model.Document;
+import shop.manager.items.model.Item;
+import shop.manager.util.Logger;
 import shop.serwer.dao.model.deliveries.DeliveryEntity;
 import shop.serwer.dao.model.deliveries.DeliveryItemEntity;
 import shop.serwer.dao.model.deliveries.SupplierEntity;
 import shop.serwer.dao.model.documents.DocumentEntity;
+import shop.serwer.dao.model.item.ItemEntity;
 
 public class Mapper {
 
@@ -45,6 +48,7 @@ public class Mapper {
 
   public static ObservableList<DeliveryItem> mapToDeliveryItemList(
       List<DeliveryItemEntity> listOfItems) {
+    Logger.log("lista itemow size " + listOfItems.size());
     ObservableList<DeliveryItem> list = FXCollections.observableArrayList();
     for(DeliveryItemEntity itemEntity : listOfItems) {  
       list.add(mapToDeliveryItem(itemEntity));
@@ -53,8 +57,22 @@ public class Mapper {
   }
 
   public static DeliveryItem mapToDeliveryItem(DeliveryItemEntity itemEntity) {
-    DeliveryItem deliveryItem = new DeliveryItem(mapToIntegerProperty(itemEntity.getId()), mapToIntegerProperty(itemEntity.getAmount()), mapToDoubleProperty(itemEntity.getPrice()));
+    DeliveryItem deliveryItem = new DeliveryItem(
+        mapToIntegerProperty(itemEntity.getId()), 
+        mapToIntegerProperty(itemEntity.getAmount()), 
+        mapToDoubleProperty(itemEntity.getPrice()),
+        mapToItem(itemEntity.getItem())
+        );
+  
     return deliveryItem;
+  }
+
+  private static Item mapToItem(ItemEntity itemEntity) {
+    Item item = new Item();
+    item.setId(itemEntity.getId());
+    item.setCode(mapToStringProperty(itemEntity.getCode()));
+    item.setName(mapToStringProperty(itemEntity.getName()));
+    return item;
   }
 
   public static DoubleProperty mapToDoubleProperty(double doubleValue) {
