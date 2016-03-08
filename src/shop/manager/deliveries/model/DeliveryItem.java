@@ -10,6 +10,12 @@ public class DeliveryItem {
   private DoubleProperty price;
   private Item item;
   
+  public DeliveryItem(IntegerProperty amount, DoubleProperty price, Item item) {
+    this.amount = amount;
+    this.price = price;
+    this.item = item;
+  }
+  
   public DeliveryItem(IntegerProperty id, IntegerProperty amount, DoubleProperty price, Item item) {
     this.id = id;
     this.amount = amount;

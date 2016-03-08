@@ -6,6 +6,8 @@ public abstract class AbstractPopup<T> {
   
   T returnObject;
   
+  //Interface callback;
+  
   protected AbstractPopup() {
     
   }
@@ -13,4 +15,6 @@ public abstract class AbstractPopup<T> {
   public void setResultCallback(Function callback) {
     
   }
+  
+  
 }

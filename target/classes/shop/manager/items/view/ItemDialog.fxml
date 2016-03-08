@@ -28,18 +28,18 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="268.0" text="Szukaj" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#onSearchAction" prefHeight="25.0" prefWidth="268.0" text="Szukaj" GridPane.rowIndex="2" />
                   <Label text="Kod Produktu" />
                   <Label text="Nazwa Produktu" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="351.0" text="Wybierz" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <TextField fx:id="itemCode" GridPane.columnIndex="1" />
+                  <TextField fx:id="itemName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#onSelectAction" prefHeight="25.0" prefWidth="351.0" text="Wybierz" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <TableView prefHeight="399.0" prefWidth="762.0">
+            <TableView fx:id="itemTableList" prefHeight="399.0" prefWidth="762.0">
               <columns>
-                <TableColumn prefWidth="204.0" text="Kod" />
-                <TableColumn prefWidth="224.0" text="Nazwa" />
+                <TableColumn fx:id="code" prefWidth="204.0" text="Kod" />
+                <TableColumn fx:id="name" prefWidth="224.0" text="Nazwa" />
               </columns>
             </TableView>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">

@@ -109,4 +109,21 @@ public class Mapper {
     
     return temp;
   }
+
+  public static ObservableList<Item> mapToItemList(List<ItemEntity> listOfItems) {
+    ObservableList<Item> temp = FXCollections.observableArrayList();
+    for(ItemEntity itemEntity : listOfItems) {
+      temp.add(mapToItem(itemEntity));
+    }
+    
+    return temp;
+  }
+
+  public static IntegerProperty mapToIntegerProperty(String text) {
+    return new SimpleIntegerProperty(Integer.parseInt(text));
+  }
+
+  public static DoubleProperty mapToDoubleProperty(String text) {
+    return new SimpleDoubleProperty(Double.parseDouble(text));
+  }
 }

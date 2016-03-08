@@ -16,7 +16,7 @@ public class ItemFacadeImpl extends AbstractFacade<ItemEntity> implements ItemFa
   @Override
   public List<ItemEntity> findAll() {
     TypedQuery<ItemEntity> query = em.createNamedQuery(
-        "findAll", ItemEntity.class);
+        "findAllItems", ItemEntity.class);
     
     List<ItemEntity> itemList = query.getResultList();
     return itemList;

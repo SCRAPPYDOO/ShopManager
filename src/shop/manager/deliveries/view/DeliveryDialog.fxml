@@ -45,22 +45,20 @@
                   <TextField fx:id="deliveryId" GridPane.columnIndex="1" />
                   <TextField fx:id="supplierName" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="documentName" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="284.0" text="Button" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="5" />
                </children>
                <padding>
                   <Insets bottom="10.0" />
                </padding>
             </GridPane>
-            <GridPane>
+            <GridPane prefHeight="30.0" prefWidth="592.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="217.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="118.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="36.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.0" minWidth="10.0" prefWidth="167.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" prefWidth="33.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="488.0" minWidth="10.0" prefWidth="132.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.0" minWidth="10.0" prefWidth="125.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -76,8 +74,8 @@
                      </padding>
                   </Label>
                   <Label text="Cena" GridPane.columnIndex="4" />
-                  <TextField />
-                  <TextField GridPane.columnIndex="3">
+                  <TextField fx:id="itemName" />
+                  <TextField fx:id="itemAmount" prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="3">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
@@ -85,7 +83,8 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </TextField>
-                  <TextField GridPane.columnIndex="5" />
+                  <TextField fx:id="itemPrice" prefHeight="25.0" prefWidth="151.0" GridPane.columnIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#onAddItemButton" prefHeight="25.0" prefWidth="137.0" text="Dodaj produkt" GridPane.columnIndex="6" />
                </children>
                <padding>
                   <Insets bottom="10.0" />

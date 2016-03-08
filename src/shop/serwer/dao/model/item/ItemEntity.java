@@ -3,10 +3,18 @@ package shop.serwer.dao.model.item;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "items")
+@NamedQueries({
+  @NamedQuery(name = "findAllItems",
+      query = "FROM ItemEntity item")
+  /*@NamedQuery(name = "findAllItemsBySearchCriteria",
+  query = "FROM ItemEntity item WHERE item.code := code AND item.name := name")*/
+})
 public class ItemEntity {
   @Id
   int id;

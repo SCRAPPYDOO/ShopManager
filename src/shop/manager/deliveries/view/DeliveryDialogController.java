@@ -2,7 +2,6 @@ package shop.manager.deliveries.view;
 
 import java.io.IOException;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,8 +15,9 @@ import javafx.stage.Stage;
 import shop.manager.MainApp;
 import shop.manager.deliveries.model.Delivery;
 import shop.manager.deliveries.model.DeliveryItem;
+import shop.manager.items.model.Item;
 import shop.manager.items.view.ItemDialogController;
-import shop.manager.util.Logger;
+import shop.manager.mapper.Mapper;
 
 public class DeliveryDialogController { // extends AbstractPopup<Object> {
 
@@ -32,6 +32,14 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
   @FXML
   private TextField deliveryExternalId;
 
+  Item item;
+  @FXML
+  private TextField itemName;
+  @FXML
+  private TextField itemAmount;
+  @FXML
+  private TextField itemPrice;
+  
   @FXML
   private TableView<DeliveryItem> deliveryItemTable;
   @FXML
@@ -53,11 +61,20 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
   
   @FXML
   private void initialize() {
-    id.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
+    id.setCellValueFactory(cellData -> { 
+      if(cellData.getValue().getId() != null) {
+        return cellData.getValue().getId().asObject();
+      } else {
+        return null;
+      }
+    });
+    
     code.setCellValueFactory(cellData -> cellData.getValue().getItem().getCode());
     name.setCellValueFactory(cellData -> cellData.getValue().getItem().getName());
-    amount.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
+    amount.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
     price.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
+    
+    itemName.setEditable(false);
   }
 
   public void setDialogStage(Stage dialogStage) {
@@ -114,7 +131,8 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
       dialogStage.setScene(scene);
       ItemDialogController controller = loader.getController();
       controller.setDialogStage(dialogStage);
-
+      controller.setParent(this);
+      
       dialogStage.showAndWait();
 
       return controller.isOkClicked();
@@ -122,5 +140,23 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
       e.printStackTrace();
       return false;
     }
+  }
+
+  @FXML
+  private void onAddItemButton() {
+    if(this.item != null && this.itemAmount.getText() != null && this.itemPrice != null) {
+      DeliveryItem devitem = new DeliveryItem(Mapper.mapToIntegerProperty(this.itemAmount.getText()), Mapper.mapToDoubleProperty(this.itemPrice.getText()) , this.item);
+      this.deliveryItemTable.getItems().add(devitem);
+    
+      this.item = null;
+      this.itemName.setText(null);
+      this.itemAmount.setText(null);
+      this.itemAmount.setText(null);
+    }
+  }
+
+  public void setCallbackResult(Item item) {
+    this.item = item; 
+    this.itemName.setText(item.getCodeNameString());
   }
 }

@@ -33,5 +33,8 @@ public class Item {
     this.name = name;
   }
   
+  public String getCodeNameString() {
+    return this.code.get() + " " + this.name.get();
+  }
   
 }
