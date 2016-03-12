@@ -6,6 +6,7 @@ import javafx.beans.property.StringProperty;
 public class Supplier {
   private IntegerProperty id;
   private StringProperty name;
+  private StringProperty nip;
   
   public Supplier() {}
 
@@ -28,4 +29,13 @@ public class Supplier {
   public String getNameAsString() {
     return name.get();
   }
+
+  public StringProperty getNip() {
+    return nip;
+  }
+
+  public void setNip(StringProperty nip) {
+    this.nip = nip;
+  }
+  
 }

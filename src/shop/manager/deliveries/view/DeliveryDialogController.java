@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import shop.manager.MainApp;
 import shop.manager.deliveries.model.Delivery;
 import shop.manager.deliveries.model.DeliveryItem;
+import shop.manager.deliveries.model.Supplier;
 import shop.manager.items.model.Item;
 import shop.manager.items.view.ItemDialogController;
 import shop.manager.mapper.Mapper;
@@ -32,6 +33,7 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
   @FXML
   private TextField deliveryExternalId;
 
+  //Wybor Itemu
   Item item;
   @FXML
   private TextField itemName;
@@ -40,6 +42,9 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
   @FXML
   private TextField itemPrice;
   
+  //Wybor dostawcy
+  Supplier supplier;
+   
   @FXML
   private TableView<DeliveryItem> deliveryItemTable;
   @FXML
@@ -143,6 +148,32 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
   }
 
   @FXML
+  private boolean onSearchSupplierButton() {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(MainApp.class.getResource("deliveries/view/SupplierDialog.fxml"));
+      AnchorPane page = (AnchorPane) loader.load();
+
+      dialogStage = new Stage();
+      dialogStage.setTitle("Dostawcy");
+      dialogStage.initModality(Modality.WINDOW_MODAL);
+      dialogStage.initOwner(null);
+      Scene scene = new Scene(page);
+      dialogStage.setScene(scene);
+      SupplierDialogController controller = loader.getController();
+      controller.setDialogStage(dialogStage);
+      controller.setParent(this);
+      
+      dialogStage.showAndWait();
+
+      return controller.isOkClicked();
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }   
+  }
+  
+  @FXML
   private void onAddItemButton() {
     if(this.item != null && this.itemAmount.getText() != null && this.itemPrice != null) {
       DeliveryItem devitem = new DeliveryItem(Mapper.mapToIntegerProperty(this.itemAmount.getText()), Mapper.mapToDoubleProperty(this.itemPrice.getText()) , this.item);
@@ -151,12 +182,17 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
       this.item = null;
       this.itemName.setText(null);
       this.itemAmount.setText(null);
-      this.itemAmount.setText(null);
+      this.itemPrice.setText(null);
     }
   }
 
   public void setCallbackResult(Item item) {
     this.item = item; 
     this.itemName.setText(item.getCodeNameString());
+  }
+
+  public void setCallbackResult(Supplier supplier) {
+    this.supplier = supplier;
+    this.supplierName.setText(supplier.getNameAsString());
   }
 }

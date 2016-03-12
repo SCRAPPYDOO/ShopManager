@@ -126,4 +126,9 @@ public class Mapper {
   public static DoubleProperty mapToDoubleProperty(String text) {
     return new SimpleDoubleProperty(Double.parseDouble(text));
   }
+
+  public static ObservableList<Supplier> mapToSupplierList(List<SupplierEntity> listOfSupplier) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

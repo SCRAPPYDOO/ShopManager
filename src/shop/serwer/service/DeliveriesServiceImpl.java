@@ -11,9 +11,11 @@ import shop.serwer.dao.model.deliveries.DeliveryEntity;
 
 public class DeliveriesServiceImpl implements DeliveriesService {
   
+  DeliveriesFacade facade = new DeliveriesFacadeImpl();
+  
   @Override
   public ObservableList<Delivery> getListOfDeliveries() {
-    DeliveriesFacade facade = new DeliveriesFacadeImpl();
+    
     List<DeliveryEntity> deliveryEntity = facade.findAll();
     return Mapper.mapToDeliveryList(deliveryEntity);
   }
