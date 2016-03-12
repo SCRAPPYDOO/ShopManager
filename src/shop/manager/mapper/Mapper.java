@@ -23,9 +23,9 @@ import shop.manager.items.model.Item;
 import shop.manager.util.Logger;
 import shop.serwer.dao.model.deliveries.DeliveryEntity;
 import shop.serwer.dao.model.deliveries.DeliveryItemEntity;
-import shop.serwer.dao.model.deliveries.SupplierEntity;
 import shop.serwer.dao.model.documents.DocumentEntity;
 import shop.serwer.dao.model.item.ItemEntity;
+import shop.serwer.dao.model.supplier.SupplierEntity;
 
 public class Mapper {
 
@@ -128,7 +128,10 @@ public class Mapper {
   }
 
   public static ObservableList<Supplier> mapToSupplierList(List<SupplierEntity> listOfSupplier) {
-    // TODO Auto-generated method stub
-    return null;
+    ObservableList<Supplier> temp = FXCollections.observableArrayList();
+    for(SupplierEntity supplierEntity : listOfSupplier) {
+      temp.add(mapToSupplier(supplierEntity));
+    }
+    return temp;
   }
 }

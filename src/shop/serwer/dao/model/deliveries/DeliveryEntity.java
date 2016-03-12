@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import shop.serwer.dao.model.documents.DocumentEntity;
+import shop.serwer.dao.model.supplier.SupplierEntity;
 
 @Entity
 @Table(name="deliveries")

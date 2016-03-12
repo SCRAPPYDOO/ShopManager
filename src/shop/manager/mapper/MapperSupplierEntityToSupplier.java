@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 import shop.manager.deliveries.model.Supplier;
-import shop.serwer.dao.model.deliveries.SupplierEntity;
+import shop.serwer.dao.model.supplier.SupplierEntity;
 
 public class MapperSupplierEntityToSupplier extends CustomMapper<SupplierEntity, Supplier>{
   

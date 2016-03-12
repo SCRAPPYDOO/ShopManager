@@ -6,7 +6,7 @@ import shop.serwer.dao.facade.AbstractFacade;
 import shop.serwer.dao.facade.supplier.SupplierFacade;
 import shop.serwer.dao.facade.supplier.SupplierFacadeImpl;
 import shop.serwer.dao.facade.supplier.SupplierSearchCriteria;
-import shop.serwer.dao.model.deliveries.SupplierEntity;
+import shop.serwer.dao.model.supplier.SupplierEntity;
 
 public class SupplierServiceImpl implements SupplierService {
 

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 
 import shop.serwer.dao.facade.AbstractFacade;
-import shop.serwer.dao.model.deliveries.SupplierEntity;
+import shop.serwer.dao.model.supplier.SupplierEntity;
 
 public class SupplierFacadeImpl  extends AbstractFacade<SupplierEntity> implements SupplierFacade {
 

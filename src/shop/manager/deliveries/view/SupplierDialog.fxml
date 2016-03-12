@@ -36,9 +36,9 @@
             </GridPane>
             <TableView fx:id="supplierTable" prefHeight="516.0" prefWidth="723.0">
               <columns>
-                <TableColumn fx:id="columnId" prefWidth="75.0" text="C1" />
-                <TableColumn fx:id="columnName" prefWidth="75.0" text="C2" />
-                  <TableColumn fx:id="columnNip" prefWidth="75.0" text="Column X" />
+                <TableColumn fx:id="columnId" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="columnName" prefWidth="402.0" text="Nazwa" />
+                  <TableColumn fx:id="columnNip" minWidth="0.0" prefWidth="245.0" text="Nip" />
               </columns>
             </TableView>
          </children>

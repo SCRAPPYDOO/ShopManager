@@ -11,8 +11,8 @@ import shop.manager.deliveries.model.Supplier;
 import shop.manager.documents.model.Document;
 import shop.serwer.dao.model.deliveries.DeliveryEntity;
 import shop.serwer.dao.model.deliveries.DeliveryItemEntity;
-import shop.serwer.dao.model.deliveries.SupplierEntity;
 import shop.serwer.dao.model.documents.DocumentEntity;
+import shop.serwer.dao.model.supplier.SupplierEntity;
 
 public class MapperDefinition {
 
