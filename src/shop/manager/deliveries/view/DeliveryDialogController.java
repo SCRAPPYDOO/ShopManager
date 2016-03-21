@@ -2,9 +2,11 @@ package shop.manager.deliveries.view;
 
 import java.io.IOException;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,9 +18,16 @@ import shop.manager.MainApp;
 import shop.manager.deliveries.model.Delivery;
 import shop.manager.deliveries.model.DeliveryItem;
 import shop.manager.deliveries.model.Supplier;
+import shop.manager.documents.model.Document;
+import shop.manager.documents.view.DocumentsDialogController;
 import shop.manager.items.model.Item;
 import shop.manager.items.view.ItemDialogController;
 import shop.manager.mapper.Mapper;
+import shop.serwer.dao.model.deliveries.DeliveryEntity;
+import shop.serwer.service.DeliveriesService;
+import shop.serwer.service.DeliveriesServiceImpl;
+import shop.serwer.service.DeliveryItemService;
+import shop.serwer.service.DeliveryItemServiceImpl;
 
 public class DeliveryDialogController { // extends AbstractPopup<Object> {
 
@@ -26,10 +35,6 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
   private TextField deliveryId;
   @FXML
   private DatePicker deliveryDate;
-  @FXML
-  private TextField supplierName;
-  @FXML
-  private TextField documentName;
   @FXML
   private TextField deliveryExternalId;
 
@@ -41,10 +46,23 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
   private TextField itemAmount;
   @FXML
   private TextField itemPrice;
+  @FXML
+  private Button addItemButton;
   
   //Wybor dostawcy
   Supplier supplier;
+  @FXML
+  private TextField supplierName;
+  @FXML
+  private Button searchSupplierButton;
    
+  //Dokument
+  Document document;
+  @FXML
+  private TextField documentName;
+  @FXML
+  private Button searchDocumentButton;
+  
   @FXML
   private TableView<DeliveryItem> deliveryItemTable;
   @FXML
@@ -58,10 +76,18 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
   @FXML
   private TableColumn<DeliveryItem, Double> price;
   
+  @FXML
+  private Button saveButton;
+  @FXML
+  private Button editButton;
+  
   private Delivery delivery;
   private Stage dialogStage;
   private boolean okClicked = false;
-
+  
+  private DeliveriesService deliveryService = new DeliveriesServiceImpl();
+  private DeliveryItemService deliveryItemService = new DeliveryItemServiceImpl();
+  
   public DeliveryDialogController() {}
   
   @FXML
@@ -80,6 +106,22 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
     price.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
     
     itemName.setEditable(false);
+    
+    this.setControllsEnabled(true);
+  }
+
+  private void setControllsEnabled(boolean enabled) {
+    this.deliveryId.setEditable(false);
+    this.supplierName.setEditable(false);
+    this.documentName.setEditable(false);
+    
+    this.deliveryDate.setEditable(enabled);
+    this.deliveryExternalId.setEditable(enabled);
+    
+    //Items
+    this.addItemButton.setDisable(!enabled);
+    this.searchDocumentButton.setDisable(!enabled);
+    this.searchSupplierButton.setDisable(!enabled);
   }
 
   public void setDialogStage(Stage dialogStage) {
@@ -97,28 +139,13 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
       deliveryDate.setValue(delivery.getDeliveryDateAsLocalDate());
 
       this.deliveryItemTable.setItems(this.delivery.getItemList());
+      
+      this.setControllsEnabled(false);
     }
   }
 
   public boolean isOkClicked() {
     return okClicked;
-  }
-
-  @FXML
-  private void handleOk() {
-    if (isInputValid()) {
-      okClicked = true;
-      dialogStage.close();
-    }
-  }
-
-  @FXML
-  private void handleCancel() {
-    dialogStage.close();
-  }
-  
-  private boolean isInputValid() {
-    return true;
   }
   
   @FXML
@@ -174,6 +201,32 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
   }
   
   @FXML
+  private boolean onSearchDocumentsButton() {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(MainApp.class.getResource("documents/view/DocumentsDialog.fxml"));
+      AnchorPane page = (AnchorPane) loader.load();
+
+      dialogStage = new Stage();
+      dialogStage.setTitle("Dokumenty");
+      dialogStage.initModality(Modality.WINDOW_MODAL);
+      dialogStage.initOwner(null);
+      Scene scene = new Scene(page);
+      dialogStage.setScene(scene);
+      DocumentsDialogController controller = loader.getController();
+      controller.setDialogStage(dialogStage);
+      controller.setParent(this);
+      
+      dialogStage.showAndWait();
+
+      return controller.isOkClicked();
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }   
+  }
+  
+  @FXML
   private void onAddItemButton() {
     if(this.item != null && this.itemAmount.getText() != null && this.itemPrice != null) {
       DeliveryItem devitem = new DeliveryItem(Mapper.mapToIntegerProperty(this.itemAmount.getText()), Mapper.mapToDoubleProperty(this.itemPrice.getText()) , this.item);
@@ -188,11 +241,42 @@ public class DeliveryDialogController { // extends AbstractPopup<Object> {
 
   public void setCallbackResult(Item item) {
     this.item = item; 
+    this.item.setDelivery(this.delivery);
     this.itemName.setText(item.getCodeNameString());
   }
 
   public void setCallbackResult(Supplier supplier) {
     this.supplier = supplier;
     this.supplierName.setText(supplier.getNameAsString());
+  }
+  
+  public void setCallbackResult(Document document) {
+    this.document = document;
+    this.documentName.setText(document.getDocumentNameAsString());
+  }
+  
+  @FXML
+  private void onSaveAction() {
+    Delivery delivery = Mapper.mapToDelivery(deliveryService.saveDevileryEntity(Mapper.mapToDeliveryEntity(this.getDelivery())));
+    
+    ObservableList<DeliveryItem> items = this.deliveryItemTable.getItems();
+    items.forEach((item) -> { item.setDelivery(delivery); });
+    deliveryItemService.saveDeliveryItemsEntityList(Mapper.mapToListOfItemsEntity(items));
+    dialogStage.close();
+  }
+  
+  @FXML
+  private void onEditAction() {
+    this.setControllsEnabled(true);
+  }
+  
+  private Delivery getDelivery() {
+    Delivery temp = new Delivery();
+    temp.setDocument(this.document);
+    temp.setDeliveryDate(this.deliveryDate.valueProperty());
+    temp.setExternalId(Mapper.mapToStringProperty(this.deliveryExternalId.getText()));
+    temp.setId(Mapper.mapToIntegerProperty(this.deliveryId.promptTextProperty()));
+    temp.setSupplier(this.supplier);
+    return temp;
   }
 }

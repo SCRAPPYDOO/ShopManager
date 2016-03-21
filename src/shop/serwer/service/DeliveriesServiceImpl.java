@@ -19,4 +19,9 @@ public class DeliveriesServiceImpl implements DeliveriesService {
     List<DeliveryEntity> deliveryEntity = facade.findAll();
     return Mapper.mapToDeliveryList(deliveryEntity);
   }
+
+  @Override
+  public DeliveryEntity saveDevileryEntity(DeliveryEntity delivery) {
+    return facade.create(delivery);
+  }
 }

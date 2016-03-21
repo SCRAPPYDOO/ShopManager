@@ -1,12 +1,14 @@
 package shop.serwer.dao.model.deliveries;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import shop.serwer.dao.model.item.ItemEntity;
@@ -16,6 +18,7 @@ import shop.serwer.dao.model.item.ItemEntity;
 public class DeliveryItemEntity {
   @Id
   @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   
   @ManyToOne(fetch = FetchType.LAZY)
@@ -28,7 +31,7 @@ public class DeliveryItemEntity {
   @Column(name = "price")
   private double price;
    
-  @OneToOne
+  @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
   @JoinColumn(name="delivery_id", nullable=false)
   private DeliveryEntity delivery;
 

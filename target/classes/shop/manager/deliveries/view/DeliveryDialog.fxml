@@ -37,8 +37,8 @@
                   <Label text="Dostawca" GridPane.rowIndex="3" />
                   <Label text="Dokument" GridPane.rowIndex="4" />
                   <Label text="Id" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="306.0" text="Szukaj" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Button mnemonicParsing="false" onAction="#onSearchSupplierButton" prefHeight="25.0" prefWidth="276.0" text="Szukaj" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button fx:id="searchDocumentButton" mnemonicParsing="false" onAction="#onSearchDocumentsButton" prefHeight="25.0" prefWidth="306.0" text="Szukaj" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Button fx:id="searchSupplierButton" mnemonicParsing="false" onAction="#onSearchSupplierButton" prefHeight="25.0" prefWidth="276.0" text="Szukaj" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <DatePicker fx:id="deliveryDate" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Numer Zamówienia" GridPane.rowIndex="1" />
                   <TextField fx:id="deliveryExternalId" prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -84,7 +84,7 @@
                      </padding>
                   </TextField>
                   <TextField fx:id="itemPrice" prefHeight="25.0" prefWidth="151.0" GridPane.columnIndex="5" />
-                  <Button mnemonicParsing="false" onAction="#onAddItemButton" prefHeight="25.0" prefWidth="137.0" text="Dodaj produkt" GridPane.columnIndex="6" />
+                  <Button fx:id="addItemButton" mnemonicParsing="false" onAction="#onAddItemButton" prefHeight="25.0" prefWidth="137.0" text="Dodaj produkt" GridPane.columnIndex="6" />
                </children>
                <padding>
                   <Insets bottom="10.0" />
@@ -104,7 +104,8 @@
             </TableView>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button mnemonicParsing="false" onAction="#handleOk" text="Zapisz" />
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditAction" text="Edytuj" />
+                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveAction" text="Zapisz" />
               </buttons>
             </ButtonBar>
          </children>

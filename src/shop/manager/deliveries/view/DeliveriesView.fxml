@@ -25,11 +25,11 @@
                <children>
                   <TableView fx:id="deliveryTable" layoutX="288.0" layoutY="53.0" prefHeight="413.0" prefWidth="877.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
-                        <TableColumn fx:id="externalId" prefWidth="75.0" text="Numer Zamówienia" />
-                        <TableColumn fx:id="supplier" prefWidth="75.0" text="Dostawca" />
-                        <TableColumn fx:id="documentId" prefWidth="75.0" text="Faktura Id" />
-                      <TableColumn fx:id="deliveryDate" prefWidth="75.0" text="Data Dostawy" />
+                      <TableColumn fx:id="id" prefWidth="51.0" text="Id" />
+                        <TableColumn fx:id="externalId" prefWidth="206.0" text="Numer Zamówienia" />
+                        <TableColumn fx:id="supplier" prefWidth="224.0" text="Dostawca" />
+                        <TableColumn fx:id="documentId" prefWidth="212.0" text="Faktura Id" />
+                      <TableColumn fx:id="deliveryDate" prefWidth="183.0" text="Data Dostawy" />
                     </columns>
                   </TableView>
                </children>

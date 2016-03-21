@@ -1,6 +1,7 @@
 package shop.manager.mapper;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +68,7 @@ public class Mapper {
     return deliveryItem;
   }
 
-  private static Item mapToItem(ItemEntity itemEntity) {
+  public static Item mapToItem(ItemEntity itemEntity) {
     Item item = new Item();
     item.setId(itemEntity.getId());
     item.setCode(mapToStringProperty(itemEntity.getCode()));
@@ -83,13 +84,15 @@ public class Mapper {
     Supplier supplier = new Supplier();
     supplier.setId(mapToIntegerProperty(supplierEntity.getId()));
     supplier.setName(mapToStringProperty(supplierEntity.getName()));
+    supplier.setNip(mapToStringProperty(supplierEntity.getNip()));
     return supplier;
   }
 
   public static Document mapToDocument(DocumentEntity documentEntity) {
     Document document = new Document();
     document.setId(documentEntity.getId());
-    document.setDocumentName(mapToStringProperty("maper fake name"));
+    document.setDocumentName(mapToStringProperty(documentEntity.getDocumentName()));
+    document.setSupplier(mapToSupplier(documentEntity.getSupplier()));
     return document;
   }
 
@@ -133,5 +136,86 @@ public class Mapper {
       temp.add(mapToSupplier(supplierEntity));
     }
     return temp;
+  }
+
+  public static ObservableList<Document> mapToDocumentsList(List<DocumentEntity> listOfDocuments) {
+    ObservableList<Document> temp = FXCollections.observableArrayList();
+    for(DocumentEntity documentEntity : listOfDocuments) {
+      temp.add(mapToDocument(documentEntity));
+    }
+    return temp;
+  }
+
+  public static DeliveryEntity mapToDeliveryEntity(Delivery delivery) {
+    DeliveryEntity deliveryEntity = new DeliveryEntity();
+    deliveryEntity.setDeliveryDate(mapToDate(delivery.getDeliveryDate()));
+    deliveryEntity.setDocument(mapToDocumentEntity(delivery.getDocument()));
+    deliveryEntity.setExternalId(delivery.getExternalId().get());
+    //deliveryEntity.setListOfItems(mapToListOfItemsEntity(delivery.getItemList()));
+    deliveryEntity.setSupplier(mapToSupplierEntity(delivery.getSupplier()));
+    return deliveryEntity;
+  }
+
+  public static DocumentEntity mapToDocumentEntity(Document document) {
+    DocumentEntity documentEntity = new DocumentEntity();
+    documentEntity.setDocumentName(document.getDocumentName().get());
+    documentEntity.setId(document.getId());
+    documentEntity.setSupplier(mapToSupplierEntity(document.getSupplier()));
+    return documentEntity;
+  }
+
+  public static Date mapToDate(ObjectProperty<LocalDate> deliveryDate) {
+    LocalDate localDate = deliveryDate.getValue();
+    
+    Calendar cal = Calendar.getInstance();
+    cal.set(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
+    return cal.getTime();
+  }
+
+  public static List<DeliveryItemEntity> mapToListOfItemsEntity(
+      ObservableList<DeliveryItem> itemList) {
+    List<DeliveryItemEntity> temp = new ArrayList<DeliveryItemEntity>();
+    for(DeliveryItem deliveryItem : itemList) {
+      temp.add(mapToDeliveryItemEntity(deliveryItem));
+    }
+    return temp;
+  }
+
+  public static DeliveryItemEntity mapToDeliveryItemEntity(DeliveryItem deliveryItem) {
+    DeliveryItemEntity deliveryItemEntity = new DeliveryItemEntity();
+    if(deliveryItem.getId() != null) {
+      deliveryItemEntity.setId(deliveryItem.getId().get());
+    }
+    deliveryItemEntity.setDelivery(mapToDeliveryEntity(deliveryItem.getDelivery()));
+    deliveryItemEntity.setAmount(deliveryItem.getAmount().get());
+    deliveryItemEntity.setItem(mapToItemEntity(deliveryItem.getItem()));
+    deliveryItemEntity.setPrice(deliveryItem.getPrice().get());
+    return deliveryItemEntity;
+  }
+
+  public static ItemEntity mapToItemEntity(Item item) {
+    ItemEntity itemEntity = new ItemEntity();
+    itemEntity.setId(item.getId());
+    itemEntity.setName(item.getName().get());
+    itemEntity.setCode(item.getCode().get());
+    return itemEntity;
+  }
+
+  public static SupplierEntity mapToSupplierEntity(Supplier supplier) {
+    SupplierEntity supplierEntity = new SupplierEntity();
+    if(supplier.getId() != null) {
+      supplierEntity.setId(supplier.getId().get());
+    }
+    supplierEntity.setName(supplier.getName().get());
+    supplierEntity.setNip(supplier.getNip().get());
+    return supplierEntity;
+  }
+
+  public static IntegerProperty mapToIntegerProperty(StringProperty promptTextProperty) {
+    try {
+      return mapToIntegerProperty(Integer.parseInt(promptTextProperty.get()));
+    } catch(NumberFormatException e) {
+      return null;
+    }
   }
 }

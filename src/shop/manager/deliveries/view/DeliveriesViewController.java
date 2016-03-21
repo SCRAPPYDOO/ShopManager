@@ -57,6 +57,8 @@ public class DeliveriesViewController {
     deliveriesService = new DeliveriesServiceImpl();
 
     this.deliveryTable.setItems(deliveriesService.getListOfDeliveries());
+    
+
   }
 
   private void initializeDeliveryDialog() {

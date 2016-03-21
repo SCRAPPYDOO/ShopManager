@@ -9,6 +9,7 @@ public class DeliveryItem {
   private IntegerProperty amount;
   private DoubleProperty price;
   private Item item;
+  private Delivery delivery;
   
   public DeliveryItem(IntegerProperty amount, DoubleProperty price, Item item) {
     this.amount = amount;
@@ -53,5 +54,13 @@ public class DeliveryItem {
 
   public void setItem(Item item) {
     this.item = item;
+  }
+
+  public Delivery getDelivery() {
+    return delivery;
+  }
+
+  public void setDelivery(Delivery delivery) {
+    this.delivery = delivery;
   }
 }
